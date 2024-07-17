@@ -1,0 +1,54 @@
+h1{
+    text-align: center;
+}
+
+.library{
+    background-color: black;
+    padding: 20px;
+    border: 1px solid whitesmoke;
+    border-radius: 10%;
+    display: flex;
+
+}
+
+.book{
+    height: 200px;
+    width: 200px;
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid whitesmoke;
+    border-radius: 10%;
+    margin: 20px;
+}
+.btn-add {
+    display: inline-block;
+    padding: 0.5em 1.7em;
+    margin: 0 0.1em 0.5em 0;
+    border: 0.16em solid rgb(255, 255, 255);
+    border-radius: 2em;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    text-shadow: 0 0.04em 0.04em rgba(255, 255, 255, 0.253);
+    text-align: center;
+    background-color: #000000;
+}
+
+.btn-add:hover {
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    border: 0.16em solid black;
+}
+
+
+.btn-dlt{
+    background-color: red;
+    border: 2px solid red;
+    border-radius: 5px;
+    font-weight: 1000;
+    font-size: 17px;
+    
+}
+
