@@ -1,5 +1,6 @@
 const theLibrary = []
 
+
 const dialog = document.querySelector('#dialog')
 const showButton = document.querySelector('.btn-add')
 const submitButton = document.querySelector('#submit-btn')
@@ -18,107 +19,99 @@ submitButton.addEventListener("click", (e) => {
 })
 
 
-
 showButton.addEventListener('click', () => {
   dialog.showModal();
 })
 
 
 
-function Book(title, author, pages, status) {
-  this.title = title
-  this.author = author
-  this.pages = pages
-  this.status = status
+class Book{
 
+  att = 0;
 
-}
-
-
-const book1 = new Book("Harry Potter", "JK Rowling", 355, "Read")
-const book2 = new Book("The Potter", "JK Rowling", 334, "Not Read")
-
-theLibrary.push(book1)
-theLibrary.push(book2)
-
-function createCard(book,attribute) {
-
-  const library = document.querySelector('.library')
-  const bookdiv = document.createElement("div")
-  bookdiv.className = "book"
-  bookdiv.setAttribute("data-index", attribute)
-  library.appendChild(bookdiv)
-
-  const title = document.createElement("h1")
-  const author = document.createElement("p")
-  const pages = document.createElement("p")
-
-  title.textContent = book.title
-  author.textContent = book.author
-  pages.textContent = book.pages
-
-  bookdiv.appendChild(title)
-  bookdiv.appendChild(author)
-  bookdiv.appendChild(pages)
-  bookdiv.appendChild(statusToggle(book.status))
-  bookdiv.appendChild(deleteButton())
-
-
-
-}
-
-
-
-function deleteButton() {
-  const deleteButton = document.createElement('button')
-  deleteButton.textContent = "X"
-  deleteButton.className = "btn-dlt"
-  deleteButton.addEventListener("click",(e) => {
-    removeBook(e.target.parentNode.getAttribute("data-index"));
-  })
-  return deleteButton
-}
-
-
-function statusToggle(status) {
-  const statusToggle = document.createElement('button')
-  statusToggle.className = 'btn-toggle'
-  if (status == "Not Read") {
-    statusToggle.classList.add('not')
+  constructor(title, author, pages, status){
+    this.title = title
+    this.author = author
+    this.pages = pages
+    this.status = status
+    this.createCard()
+    this.att++;
   }
-  statusToggle.textContent = status
 
-  statusToggle.addEventListener('click', () => {
-    if(statusToggle.textContent == "Read") {
-      statusToggle.textContent = "Not Read"
+  createCard() {
+    const bookdiv = document.createElement("div")
+    bookdiv.className = "book"
+    bookdiv.setAttribute("data-index", this.att)
+    const title = document.createElement("h1")
+    const author = document.createElement("p")
+    const pages = document.createElement("p")
+
+    title.textContent = this.title
+    author.textContent = this.author
+    pages.textContent = this.pages
+
+    bookdiv.appendChild(title)
+    bookdiv.appendChild(author)
+    bookdiv.appendChild(pages)
+    bookdiv.appendChild(this.#statusToggle(this.status))
+    bookdiv.appendChild(this.#deleteButton())
+
+    return bookdiv
+
+  }
+
+
+  #deleteButton() {
+    const deleteButton = document.createElement('button')
+    deleteButton.textContent = "X"
+    deleteButton.className = "btn-dlt"
+    deleteButton.addEventListener("click",(e) => {
+      removeBook(e.target.parentNode.getAttribute("data-index"));
+    })
+    return deleteButton
+  }
+
+  #statusToggle(status) {
+    const statusToggle = document.createElement('button')
+    statusToggle.className = 'btn-toggle'
+    if (status == "Not Read") {
       statusToggle.classList.add('not')
     }
-    else {
-      statusToggle.textContent = "Read"
-      statusToggle.classList.remove('not')
-    }
-  })
+    statusToggle.textContent = status
 
-  return statusToggle
+    statusToggle.addEventListener('click', () => {
+      if(statusToggle.textContent == "Read") {
+        statusToggle.textContent = "Not Read"
+        statusToggle.classList.add('not')
+      }
+      else {
+        statusToggle.textContent = "Read"
+        statusToggle.classList.remove('not')
+      }
+    })
+
+    return statusToggle
+  }
+
 }
 
 
 
 function addBooktoLibrary(title, author, pages, status) {
   const book = new Book(title, author, pages, status)
-  createCard(book)
   theLibrary.push(book)
+  const library = document.querySelector('.library')
+  library.appendChild(book.createCard())
 
 }
 
-function displayLibrary(library) {
-  library.forEach((book, i) => {
-    createCard(book, i)
-  });
-}
 
 window.addEventListener("load", () => {
-  displayLibrary(theLibrary)
+  addBooktoLibrary("Harry Potter", "JK Rowling", 355, "Read")
+  addBooktoLibrary("The Potter", "JK Rowling", 334, "Not Read")
+  theLibrary.push(book1)
+  theLibrary.push(book2)
+
 });
 
 
