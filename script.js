@@ -30,11 +30,13 @@ function Book(title, author, pages, status) {
   this.author = author
   this.pages = pages
   this.status = status
+
+
 }
 
 
-const book1 = new Book("Harry Potter", "JK Rowling", 355, "Reading")
-const book2 = new Book("The Potter", "JK Rowling", 334, "Finished")
+const book1 = new Book("Harry Potter", "JK Rowling", 355, "Read")
+const book2 = new Book("The Potter", "JK Rowling", 334, "Not Read")
 
 theLibrary.push(book1)
 theLibrary.push(book2)
@@ -50,17 +52,15 @@ function createCard(book,attribute) {
   const title = document.createElement("h1")
   const author = document.createElement("p")
   const pages = document.createElement("p")
-  const status = document.createElement("p")
 
   title.textContent = book.title
   author.textContent = book.author
   pages.textContent = book.pages
-  status.textContent = book.status
 
   bookdiv.appendChild(title)
   bookdiv.appendChild(author)
   bookdiv.appendChild(pages)
-  bookdiv.appendChild(status)
+  bookdiv.appendChild(statusToggle(book.status))
   bookdiv.appendChild(deleteButton())
 
 
@@ -78,6 +78,31 @@ function deleteButton() {
   })
   return deleteButton
 }
+
+
+function statusToggle(status) {
+  const statusToggle = document.createElement('button')
+  statusToggle.className = 'btn-toggle'
+  if (status == "Not Read") {
+    statusToggle.classList.add('not')
+  }
+  statusToggle.textContent = status
+
+  statusToggle.addEventListener('click', () => {
+    if(statusToggle.textContent == "Read") {
+      statusToggle.textContent = "Not Read"
+      statusToggle.classList.add('not')
+    }
+    else {
+      statusToggle.textContent = "Read"
+      statusToggle.classList.remove('not')
+    }
+  })
+
+  return statusToggle
+}
+
+
 
 function addBooktoLibrary(title, author, pages, status) {
   const book = new Book(title, author, pages, status)
